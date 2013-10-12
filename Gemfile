@@ -4,6 +4,8 @@ gem 'rails', '4.0.0'
 gem 'mysql2'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
  gem 'therubyracer'
