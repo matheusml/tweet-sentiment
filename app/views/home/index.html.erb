@@ -1,15 +1,14 @@
-<div class="container" align="center">
-  <div class="jumbotron">
-    <h1>Navbar example</h1>
-    <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+<br/>
 
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <%= form_tag analyze_path, :method => :post, :class => 'form-inline', :role => 'form' do %>
-      <div class="form-group">
-      	<%= text_field_tag :search, nil, :class => 'form-control input-lg', :placeholder => '@obama' %>
-    	</div>
-	    <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
-    <% end %>
-    </div>
+<div class="jumbotron">
+  <h1>User's Twitter Analyzer</h1>
+  <p>Enter the user's name from the twitter account (e.g. @BarackObama) that you want to analyze the sentiment through data mining.</p>
+
+  <%= form_tag analyze_path, :method => :post, :class => 'form-inline', :role => 'form' do %>
+    <div class="form-group">
+    	<%= text_field_tag :search, nil, :class => 'form-control input-lg', :placeholder => '@BarackObama' %>
+  	</div>
+    <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+  <% end %>
   </div>
-</div> 
+</div>
