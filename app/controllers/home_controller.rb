@@ -10,8 +10,15 @@ class HomeController < ApplicationController
 		  config.access_token        = "15689757-hspmJBwuytAkFlJzKNUpvCIV0skcQbDyCKvrgTLag"
 		  config.access_token_secret = "0lufFh9k1j5mQ2DtJ2PswvGIJrZTQfsbxkau0Gp6U0"
 		end
-		puts "---- #{client.user_timeline(params[:search])}"
 
+		#first_tweet = client.user_timeline(params[:search]).first
+
+		#puts "---- #{client.methods}"
+
+		client.search("to:#{params[:search]}", :count => 5, :result_type => "recent").collect do |tweet|
+  		puts "#{tweet.user.screen_name}: #{tweet.text} \n"
+		end
+		
 		render :nothing => true
 	end
 	
