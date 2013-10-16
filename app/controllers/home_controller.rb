@@ -4,6 +4,10 @@ class HomeController < ApplicationController
 	end
 
 	def analyze
+		redirect_to result_path(params[:search])
+	end
+
+	def result
 		client = Twitter::REST::Client.new do |config|
 		  config.consumer_key        = "BlpfM8bCI4RVELlc5PGhAg"
 		  config.consumer_secret     = "IJYJ0ga6CP4sNBZ7pCgCFh73aocPXCTmbIKLYVbomIQ"
@@ -15,11 +19,7 @@ class HomeController < ApplicationController
 
 		#puts "---- #{client.methods}"
 
-		client.search("to:#{params[:search]}", :count => 5, :result_type => "recent").collect do |tweet|
-  		puts "#{tweet.user.screen_name}: #{tweet.text} \n"
-		end
-		
-		render :nothing => true
+		@tweets = client.search("to:#{params[:search]}", :count => 25, :result_type => "recent").collect
 	end
 	
 end

@@ -4,7 +4,7 @@
   <h1>User's Twitter Analyzer</h1>
   <p>Enter the user's name from the twitter account (e.g. @BarackObama) that you want to analyze the sentiment through data mining.</p>
 
-  <%= form_tag analyze_path, :method => :post, :class => 'form-inline', :role => 'form' do %>
+  <%= form_tag analyze_path, :class => 'form-inline', :role => 'form' do %>
     <div class="form-group">
     	<%= text_field_tag :search, nil, :class => 'form-control input-lg', :placeholder => '@BarackObama' %>
   	</div>
