@@ -1,0 +1,14 @@
+<br/>
+
+<div class="jumbotron">
+  <h1>User's Twitter Analyzer</h1>
+  <p>Enter the user's name from the twitter account (e.g. @BarackObama) that you want to analyze the sentiment through data mining.</p>
+
+  <%= form_tag analyze_path, :class => 'form-inline', :role => 'form' do %>
+    <div class="form-group">
+    	<%= text_field_tag :search, nil, :class => 'form-control input-lg', :placeholder => '@BarackObama' %>
+  	</div>
+    <button class="btn btn-lg btn-primary" type="submit">Enter</button>
+  <% end %>
+  </div>
+</div>
