@@ -19,7 +19,7 @@ class HomeController < ApplicationController
 
 		#puts "---- #{client.methods}"
 
-		@tweets = client.search("to:#{params[:search]}", :count => 25, :result_type => "recent").collect
+		@tweets = client.search("to:#{params[:search]}", :count => 50, :result_type => "recent").collect
 	end
 	
 end
