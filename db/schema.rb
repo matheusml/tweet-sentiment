@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131026183743) do
+ActiveRecord::Schema.define(version: 20131026184054) do
 
   create_table "contexts", force: true do |t|
     t.string   "name"
