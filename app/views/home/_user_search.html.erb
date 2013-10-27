@@ -1,0 +1,20 @@
+<br/>
+
+<div class="jumbotron">
+  <h1>Twitter Sentiment Analyzer</h1>
+  <p>Enter the user's name from a twitter account (e.g. @BarackObama), or a Hashtag (e.g. #Football) or a any simple string (e.g. 'Batman Movie'), that you want us to analyze the sentiment through data mining.</p>
+
+  <%= form_tag analyze_path, :class => 'form-inline', :role => 'form' do %>
+    <div class="form-group">
+    	<%= text_field_tag :search, nil, :class => 'form-control', :placeholder => '@BarackObama', :autofocus => true %>
+  	</div>
+    <div class="form-group">
+    	<%= select_tag :context, options_from_collection_for_select(@contexts, :id, :name), :class => 'form-control', :prompt => "Choose a Context" %>
+  	</div>
+  	<div class="form-group">
+    	<%= select_tag :result_type, options_for_select([ "Mixed", "Recent", "Popular" ]), :class => 'form-control', :prompt => "Choose a Type" %>
+  	</div>
+	  <%= submit_tag 'Enter', :class => 'btn btn-primary' %>
+  <% end %>
+  </div>
+</div>

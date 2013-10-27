@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: tweet-sentiment_development
   username: root
-  password: innvent11235
+  password:
   host: localhost
   pool: 5
   timeout: 5000
@@ -16,7 +16,7 @@ test: &TEST
   encoding: utf8
   database: tweet-sentiment_test
   username: root
-  password: innvent11235
+  password:
   host: localhost
   pool: 5
   timeout: 5000
