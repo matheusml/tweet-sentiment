@@ -1,6 +1,8 @@
 <%= render :partial => 'user_search' %>
 
 <div class="container">
+	<%= high_chart("chart", @chart)  %>
+
 	<ul class="list-group">
 		<% @tweets.each do |tweet| %>
 	  	<li class="list-group-item"><%= tweet.text %></li>
