@@ -3,9 +3,22 @@
 <div class="container">
 	<%= high_chart("chart", @chart)  %>
 
-	<ul class="list-group">
-		<% @tweets.each do |tweet| %>
-	  	<li class="list-group-item"><%= tweet.text %></li>
-	  <% end %>
-	</ul>
+	<table class="table">
+    <thead>
+      <tr>
+        <th>Tweets</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<% @tweets.each do |tweet| %>
+      <tr>
+      	<% if tweet.text.length < 70 %>
+        	<td class="danger"><%= tweet.text %></td>
+        <% else %>
+        	<td class="success"><%= tweet.text %></td>
+        <% end %>	
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
