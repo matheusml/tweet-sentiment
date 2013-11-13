@@ -21,7 +21,7 @@ class HomeController < ApplicationController
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
 
-		@tweets = client.search(search, :count => 50, :result_type => result_type, :lang => "en").collect
+		@tweets = client.search(search, :count => 1, :result_type => result_type, :lang => "en").collect
 
 		@chart = LazyHighCharts::HighChart.new('graph') do |f|
 	    f.title({ :text=>"Tweets chart"})
