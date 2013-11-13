@@ -23,22 +23,32 @@ class HomeController < ApplicationController
 
 		@tweets = client.search(search, :count => 1, :result_type => result_type, :lang => "en").collect
 
-		@chart = LazyHighCharts::HighChart.new('graph') do |f|
-	    f.title({ :text=>"Tweets chart"})
-	    f.options[:xAxis][:categories] = ['Brazil', 'Spain', 'Germany', 'Italy', 'Portugal']
-	    f.labels(:items=>[:html=>"Sentiment", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])      
-	    f.series(:type=> 'column',:name=> 'Good',:data=> [3, 2, 1, 3, 4])
-	    f.series(:type=> 'column',:name=> 'Medium',:data=> [2, 3, 5, 7, 6])
-	    f.series(:type=> 'column', :name=> 'Bad',:data=> [4, 3, 3, 9, 0])
-	    f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
-	    f.series(:type=> 'pie',:name=> 'Total consumption', 
-	      :data=> [
-	        {:name=> 'Good', :y=> 13, :color=> 'red'}, 
-	        {:name=> 'Medium', :y=> 23,:color=> 'green'},
-	        {:name=> 'Bad', :y=> 19,:color=> 'blue'}
-	      ],
-	      :center=> [100, 80], :size=> 100, :showInLegend=> false)
-	  end
+		@chart = LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
+      series = {
+               :type=> 'pie',
+               :name=> 'Browser share',
+               :data=> [
+                  ['Positive',  45.0],
+                  ['Negative',  35.0],
+                  ['Neutral',   20.0],
+               ]
+      }
+      f.series(series)
+      f.options[:title][:text] = "Pie Chart"
+      f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+      f.plot_options(:pie=>{
+        :allowPointSelect=>true, 
+        :cursor=>"pointer" , 
+        :dataLabels=>{
+          :enabled=>true,
+          :color=>"black",
+          :style=>{
+            :font=>"13px Trebuchet MS, Verdana, sans-serif"
+          }
+        }
+      })
+end
 	end
 	
 end
