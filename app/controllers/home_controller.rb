@@ -20,10 +20,15 @@ class HomeController < ApplicationController
 
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
+		@tweets = client.search(search, :count => 5, :result_type => result_type, :lang => "en").collect
 
-		@tweets = client.search(search, :count => 1, :result_type => result_type, :lang => "en").collect
+		@chart = build_chart
+	end
 
-		@chart = LazyHighCharts::HighChart.new('pie') do |f|
+	private 
+
+	def build_chart
+		LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
       series = {
                :type=> 'pie',
@@ -48,7 +53,7 @@ class HomeController < ApplicationController
           }
         }
       })
-end
+		end
 	end
 	
 end
