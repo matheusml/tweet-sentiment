@@ -16,6 +16,8 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'twitter', "~> 5.0.0.rc.1"
 
+gem 'lazy_high_charts'
+
 group :doc do
   gem 'sdoc', require: false
 end

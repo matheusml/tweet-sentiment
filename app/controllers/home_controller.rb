@@ -20,8 +20,40 @@ class HomeController < ApplicationController
 
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
+		@tweets = client.search(search, :count => 5, :result_type => result_type, :lang => "en").collect
 
-		@tweets = client.search(search, :count => 50, :result_type => result_type, :lang => "en").collect
+		@chart = build_chart
+	end
+
+	private 
+
+	def build_chart
+		LazyHighCharts::HighChart.new('pie') do |f|
+      f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
+      series = {
+               :type=> 'pie',
+               :name=> 'Browser share',
+               :data=> [
+                  ['Positive',  45.0],
+                  ['Negative',  35.0],
+                  ['Neutral',   20.0],
+               ]
+      }
+      f.series(series)
+      f.options[:title][:text] = "Pie Chart"
+      f.legend(:layout=> 'vertical',:style=> {:left=> 'auto', :bottom=> 'auto',:right=> '50px',:top=> '100px'}) 
+      f.plot_options(:pie=>{
+        :allowPointSelect=>true, 
+        :cursor=>"pointer" , 
+        :dataLabels=>{
+          :enabled=>true,
+          :color=>"black",
+          :style=>{
+            :font=>"13px Trebuchet MS, Verdana, sans-serif"
+          }
+        }
+      })
+		end
 	end
 	
 end
