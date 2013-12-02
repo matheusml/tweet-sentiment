@@ -21,6 +21,7 @@ class HomeController < ApplicationController
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
 		@tweets = client.search(search, :count => 5, :result_type => result_type, :lang => "en").collect
+		TweetHandling.handle(@tweets)
 
 		@chart = build_chart
 	end
