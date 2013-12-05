@@ -1,6 +1,6 @@
 class TweetHandling 
-  def self.handle(tweets)
-    output = prepare_arff_file
+  def self.generate_file(tweets)
+    output = prepare_file
 
     tweets.each do |tweet| 
       text = tweet.text.gsub(',', ' ').gsub('"', ' ').gsub("(", " ").gsub(")", " ").gsub("[", " ").gsub("]", " ")
@@ -9,7 +9,6 @@ class TweetHandling
       new_tweet = "'"
 
       tweet_to_array.each do |token|
-        puts "--- #{token}"
         if replace_stopwords?(token) 
           new_tweet += "STOPWORD "
         elsif replace_username?(token)
@@ -48,18 +47,10 @@ class TweetHandling
     stop_words.include?(token)
   end
 
-  def self.prepare_arff_file
-    path_to_file = "stanford.preprocessed.arff"
+  def self.prepare_file
+    path_to_file = "tweets"
     File.delete(path_to_file) if File.exist?(path_to_file)
     output = File.new(path_to_file,"a")
-
-    #arff header
-    output.puts "@relation stanford"
-    output.puts "\n"
-    output.puts "@attribute sentiment_class {positive,negative}"
-    output.puts "@attribute sentiment_text string"
-    output.puts "\n"
-    output.puts "@data" 
     output
   end
 
