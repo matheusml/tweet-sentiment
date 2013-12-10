@@ -6,7 +6,7 @@ class TweetHandling
       text = tweet.text.gsub(',', ' ').gsub('"', ' ').gsub("(", " ").gsub(")", " ").gsub("[", " ").gsub("]", " ")
       tweet_to_array = text.split(" ")
 
-      new_tweet = "'"
+      new_tweet = ""
 
       tweet_to_array.each do |token|
         if replace_stopwords?(token) 
@@ -22,10 +22,10 @@ class TweetHandling
         end
       end
 
-      new_tweet += "'"
+      new_tweet += ""
       new_tweet = new_tweet.strip
 
-      output.puts "?,#{new_tweet}"
+      output.puts "#{new_tweet}"
     end
 
     output.close

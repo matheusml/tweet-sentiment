@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 		@tweets = client.search(search, :count => 10, :result_type => result_type, :lang => "en").collect
 		
 		TweetHandling.generate_file(@tweets)
-		#Classifier.classify
+		Classifier.classify
 
 		@chart = build_chart
 	end
