@@ -48,7 +48,7 @@ class TweetHandling
   end
 
   def self.prepare_file
-    path_to_file = "tweets"
+    path_to_file = "tweets.txt"
     File.delete(path_to_file) if File.exist?(path_to_file)
     output = File.new(path_to_file,"a")
     output
