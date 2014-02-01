@@ -21,10 +21,11 @@ class HomeController < ApplicationController
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
 		
-		@tweets = client.search(search, :count => 10, :result_type => result_type, :lang => "en").collect
+		tweets = client.search(search, :count => 5, :result_type => result_type, :lang => "en").collect
 		
-		TweetHandling.generate_file(@tweets)
+		TweetHandling.generate_file(tweets)
 		Classifier.classify
+		@tweets = TweetOutputOrganizer.organize_to_show(tweets)
 
 		@chart = build_chart
 	end

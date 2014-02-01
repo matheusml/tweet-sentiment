@@ -49,7 +49,9 @@ class TweetHandling
 
   def self.prepare_file
     path_to_file = "tweets.txt"
+    path_to_output_file = "positivenegative.txt"
     File.delete(path_to_file) if File.exist?(path_to_file)
+    File.delete(path_to_output_file) if File.exist?(path_to_file)
     output = File.new(path_to_file,"a")
     output
   end
