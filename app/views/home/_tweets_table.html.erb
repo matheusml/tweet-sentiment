@@ -7,10 +7,10 @@
   <tbody>
   	<% tweets.each do |tweet| %>
     <tr>
-    	<% if tweet.text.length > 70 %>
-      	<td><span class="label label-success">Positive</span> <b><%= tweet.created_at.strftime("%d/%m/%Y at %I:%M%p") %></b> - <%= tweet.text %></td>
+    	<% if tweet[:sentiment] == 'Positive' %>
+      	<td><span class="label label-success">Positive</span> <b><%= tweet[:date].strftime("%d/%m/%Y at %I:%M%p") %></b> - <%= tweet[:text] %></td>
       <% else %>
-      	<td><span class="label label-danger">Negative</span> <b><%= tweet.created_at.strftime("%d/%m/%Y at %I:%M%p") %></b> - <%= tweet.text %></td>
+      	<td><span class="label label-danger">Negative</span> <b><%= tweet[:date].strftime("%d/%m/%Y at %I:%M%p") %></b> - <%= tweet[:text] %></td>
       <% end %>	
     </tr>
     <% end %>
