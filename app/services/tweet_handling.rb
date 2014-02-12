@@ -8,7 +8,17 @@ class TweetHandling
       new_tweet = ""
 
       tweet_to_array.each do |token|
-        new_tweet += "#{token} "
+        if replace_stopwords?(token) 
+          new_tweet += "STOPWORD "
+        elsif replace_username?(token)
+          new_tweet += "USERNAME "
+        elsif replace_hashtag?(token)
+          new_tweet += "HASHTAG "
+        elsif replace_url?(token)
+          new_tweet += "URL "
+        else              
+          new_tweet += "#{token} "
+        end
       end
 
       new_tweet += ""
@@ -73,19 +83,15 @@ class TweetHandling
 
     if File.exist?('tweets.txt')
       File.delete('tweets.txt') 
-      puts "-- aaaa"
     end
     if File.exist?('opinion.txt')
       File.delete('opinion.txt') 
-      puts "-- bbbb"
     end
     if File.exist?('opinionfact.txt')
       File.delete('opinionfact.txt') 
-      puts "-- cccc"
     end
     if File.exist?('positivenegative.txt')
       File.delete('positivenegative.txt') 
-      puts "-- dddd"
     end
 
     output = File.new(path_to_file,"a")
