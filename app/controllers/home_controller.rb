@@ -21,27 +21,40 @@ class HomeController < ApplicationController
 		result_type = params[:result_type] ? params[:result_type].downcase : 'mixed'
 		search = params[:search].gsub("@", "to:") ? params[:search] : ''
 		
-		tweets = client.search(search, :count => 5, :result_type => result_type, :lang => "en").collect
+		tweets = client.search(search, :count => 50, :result_type => result_type, :lang => "en").collect
 		
-		TweetHandling.generate_file(tweets)
-		Classifier.classify
-		@tweets = TweetOutputOrganizer.organize_to_show(tweets)
+		TweetHandling.generate_file(tweets, 'tweets.txt')
+		OpinionClassifier.classify
+		opinion_tweets_only = TweetOutputOrganizer.organize_opinion_tweets_to_show(tweets)
 
-		@chart = build_chart
+		TweetHandling.generate_opinion_file(opinion_tweets_only, 'opinion.txt')
+		SentimentClassifier.classify
+		@tweets = TweetOutputOrganizer.organize_to_show(opinion_tweets_only)
+
+		@chart = build_chart(@tweets)
 	end
 
 	private 
 
-	def build_chart
+	def build_chart(tweets)
+		positive_count = 0
+		negative_count = 0
+		tweets.each do |tweet|
+			if tweet[:sentiment] == 'Positive'
+				positive_count += 1
+			else
+				negative_count += 1
+			end
+		end
+
 		LazyHighCharts::HighChart.new('pie') do |f|
       f.chart({:defaultSeriesType=>"pie" , :margin=> [50, 200, 60, 170]} )
       series = {
                :type=> 'pie',
                :name=> 'Browser share',
                :data=> [
-                  ['Positive',  45.0],
-                  ['Negative',  35.0],
-                  ['Neutral',   20.0],
+                  ['Positive',  positive_count],
+                  ['Negative',  negative_count],
                ]
       }
       f.series(series)

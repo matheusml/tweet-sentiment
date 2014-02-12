@@ -1,6 +1,27 @@
 class TweetHandling 
-  def self.generate_file(tweets)
-    output = prepare_file
+  def self.generate_opinion_file(tweets, output_file)
+    output = File.new(output_file,"a")
+
+    tweets.each do |tweet| 
+      tweet_to_array = tweet[:text].split(" ")
+
+      new_tweet = ""
+
+      tweet_to_array.each do |token|
+        new_tweet += "#{token} "
+      end
+
+      new_tweet += ""
+      new_tweet = new_tweet.strip
+
+      output.puts "#{new_tweet}"
+    end
+
+    output.close
+  end
+
+  def self.generate_file(tweets, output_file)
+    output = prepare_file(output_file)
 
     tweets.each do |tweet| 
       text = tweet.text.gsub(',', ' ').gsub('"', ' ').gsub("(", " ").gsub(")", " ").gsub("[", " ").gsub("]", " ")
@@ -47,11 +68,26 @@ class TweetHandling
     stop_words.include?(token)
   end
 
-  def self.prepare_file
+  def self.prepare_file(output)
     path_to_file = "tweets.txt"
-    path_to_output_file = "positivenegative.txt"
-    File.delete(path_to_file) if File.exist?(path_to_file)
-    File.delete(path_to_output_file) if File.exist?(path_to_file)
+
+    if File.exist?('tweets.txt')
+      File.delete('tweets.txt') 
+      puts "-- aaaa"
+    end
+    if File.exist?('opinion.txt')
+      File.delete('opinion.txt') 
+      puts "-- bbbb"
+    end
+    if File.exist?('opinionfact.txt')
+      File.delete('opinionfact.txt') 
+      puts "-- cccc"
+    end
+    if File.exist?('positivenegative.txt')
+      File.delete('positivenegative.txt') 
+      puts "-- dddd"
+    end
+
     output = File.new(path_to_file,"a")
     output
   end
