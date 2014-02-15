@@ -13,10 +13,4 @@
 
 ActiveRecord::Schema.define(version: 20131026184054) do
 
-  create_table "contexts", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
 end

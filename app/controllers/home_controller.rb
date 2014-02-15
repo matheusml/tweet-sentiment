@@ -9,8 +9,6 @@ class HomeController < ApplicationController
 	end
 
 	def result
-		@contexts = Context.all
-
 		client = Twitter::REST::Client.new do |config|
 		  config.consumer_key        = "BlpfM8bCI4RVELlc5PGhAg"
 		  config.consumer_secret     = "IJYJ0ga6CP4sNBZ7pCgCFh73aocPXCTmbIKLYVbomIQ"
