@@ -8,9 +8,6 @@
     <div class="form-group">
     	<%= text_field_tag :search, nil, :class => 'form-control', :placeholder => '@BarackObama', :autofocus => true %>
   	</div>
-    <div class="form-group">
-    	<%= select_tag :context, options_from_collection_for_select(@contexts, :id, :name), :class => 'form-control', :prompt => "Choose a Context" %>
-  	</div>
   	<div class="form-group">
     	<%= select_tag :result_type, options_for_select([ "Mixed", "Recent", "Popular" ]), :class => 'form-control', :prompt => "Choose a Type" %>
   	</div>
