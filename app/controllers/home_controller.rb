@@ -1,7 +1,6 @@
 class HomeController < ApplicationController
 
 	def index
-		@contexts = Context.all
 	end
 
 	def analyze
