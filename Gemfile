@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.10'
+ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.5'
 #gem 'therubyracer'
 #gem 'execjs'
 gem 'jruby-openssl'
 #gem 'libv8', '3.16.14.3'
 gem 'rails', '4.0.0'
+gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
+#gem 'pg'
 #gem 'mysql2'
-#gem 'activerecord-jdbcmysql-adapter', platform: :jruby
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
