@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.5'
+ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.10'
 #gem 'therubyracer'
 #gem 'execjs'
 gem 'jruby-openssl'
